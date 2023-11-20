@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        *{
+    margin:0;
+    padding:0;
+    font-family: 'Poppins',sans-serif;
+    box-sizing:border-box;
+}
+.container{
+    width: 100%;
+    min-height:100vh;
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+/* background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%); */
+/* background-image: radial-gradient( circle farthest-corner at 22.4% 21.7%, rgba(4,189,228,1) 0%, rgba(2,83,185,1) 100.2% ); */
+    color:#fff;
+    padding :10px;
+}
+.cal{
+    width: 100%;
+    max-width: 600px;
+    margin-left: 10%;
+    margin-top: 10%;
+}
+.cal h1{
+    font-size: 60px;
+  
+    text-align: center;
+}
+.cal h1 span{
+    color:white;
+}
+.input-box {
+    margin:50px 0;
+    padding:30px;
+    border-radius: 10px;
+    background: skyblue;
+    display: flex;
+    align-items: center;
+}
+.input-box input{
+    flex:1;
+    margin-right: 20px;
+    padding: 14px 20px;
+    border: 0;
+    outline: 0;
+    font-size: 15px;
+    border-radius: 5px;
+    position: relative;
+}
+.input-box button{
+    background:orange ;
+    border:0;
+    outline: 0;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-weight: 500;
+    color: #333;
+    cursor:pointer;
+}
+#result{
+    font-size:20px;
+    }
+    #result span{
+        color:aquamarine;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cal">
+            <h1><span>Age Calculator</span></h1>
+            <div class="input-box">
+                <input type="date" id="date">
+                <button onclick="calculateAge();">Calculate</button>
+            </div>
+            <p id="result"> </p>
+        </div>
+    </div>
+    <script>
+        let userInput = document.getElementById("date");
+        userInput.max = new Date().toISOString().split("T")[0];
+        let result=document.getElementById("result");
+        function calculateAge(){
+            let birthDate = new Date(userInput.value);
+            let d1 = birthDate.getDate();
+            let m1 = birthDate.getMonth() + 1;
+            let y1 = birthDate.getFullYear();
+             let today = new  Date();
+             let d2=today.getDate();
+             let m2=today.getMonth() + 1;
+             let y2=today.getFullYear();
+            let d3,m3,y3;
+             y3=y2-y1;
+             if (m2>=m1){
+                m3=m2-m1;
+                 }
+                 else{
+                    y3--;
+                    m3=12+m2-m1;
+                 }
+                 if(d2>=d1){
+                    d3=d2-d1;
+                 }
+                 else{
+                    m3--;
+                    d3=getDaysInMonth(y1,m1) + d2-d1;
+}
+              if(m3<0){
+                      m3=11;
+                          y3--;
+}
+if (isNaN(y3) || isNaN(m3) || isNaN(d3)) {
+    result.innerHTML = `Please select your DOB`;
+  } else {
+    result.innerHTML = `You are <span>${y3}</span> years, <span>${m3}</span> months and <span>${d3}</span> days old`;
+  }
+    //   result.innerHTML = `You are <span>${y3}</span> years, <span>${m3}</span> months and <span>${d3}</span> days old`;
+        }
+
+function getDaysInMonth(year,month){
+    return new Date(year,month,0).getDate();
+
+}
+    </script>
+</body>
+</html>
